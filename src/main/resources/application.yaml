@@ -1,0 +1,66 @@
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views
+      suffix: .jsp
+
+  devtools:
+    livereload:
+      enabled:  true
+    restart:
+      enabled: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board
+    username: root
+    password: root1234!!
+
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    generate-ddl: false
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100 #??? ??? ??? ??? ??? select ?? ? ??, 100?? ??? ??? ??? ????
+    defer-datasource-initialization: true
+    # defer-datasource-initialization ???? ?????? ?? ???? ?? resource > data.sql ? ??? ?? ??? ??
+
+  h2:
+    console:
+      enabled: true #h2 ?????? ?? ????
+
+  sql:
+    init:
+      mode: always # resource > data.sql ?? ?? ?? ??? > ??
+
+debug: false
+
+logging:
+  level:
+    com.fastcamplus.projectboard: debug
+    org.springframework.web.server: debug
+    org.hibernate.type.descriptor.spi.BasicBinder: trace
+
+# actuator ? ?????? ??? ?? ?? ??? ?? ?? ?? - implementation 'org.springframework.boot:spring-boot-starter-actuator'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# yaml ??? --- ???? ???? document? ??
+---
+#spring:
+#  config:
+#    activate:
+#      on-profile: testdb #testdb ????? ???? ??? ? ????? ???
+#  datasource:
+#    url: jdbc.h2:mem:board;mode=mysql
+#    driver-class-name: org.h2.Driver
+#  sql:
+#    init:
+#      mode: always
